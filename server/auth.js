@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const USERS_FILE = './users.json';
-const JWT_SECRET = 'your_super_secret_jwt_key'; // Change for production
+const JWT_SECRET = process.env.JWT_SECRET || 'your_super_secret_jwt_key';
 
 export async function getUsers() {
   try {

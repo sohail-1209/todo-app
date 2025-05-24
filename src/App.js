@@ -9,10 +9,10 @@ import { FaMoon } from "react-icons/fa";
 import { BsSun } from "react-icons/bs";   
 import './App.css';
 
-// Use full backend URL in development, relative path in production
-const API_BASE = process.env.NODE_ENV === 'development' 
-  ? 'http://localhost:5000/api' 
-  : '/api';
+// Use Render backend URL in production, localhost in development
+const API_BASE = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:5000/api'
+  : 'https://todo-app-backend-1234.onrender.com/api';
 
 const App = () => {
   const [todos, setTodos] = useState([]); 

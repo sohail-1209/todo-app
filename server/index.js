@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
@@ -15,19 +16,15 @@ const PORT = process.env.PORT || 5000;
 
 // Middlewares
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://sohail-1209.github.io',
   credentials: true
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static files from the React app
-const reactBuildPath = path.join(__dirname, '../build');
-app.use(express.static(reactBuildPath));
-
 // Serve uploaded files from the public/uploads directory
 const uploadsPath = path.join(__dirname, 'public', 'uploads');
-console.log('Serving static files from:', uploadsPath);
+console.log('Serving uploads from:', uploadsPath);
 app.use('/uploads', express.static(uploadsPath));
 
 // API Routes
@@ -38,9 +35,9 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Backend server is running!' });
 });
 
-// Handle React routing, return all requests to React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(reactBuildPath, 'index.html'));
+// API root endpoint
+app.get('/', (req, res) => {
+  res.json({ message: 'Todo App API is running' });
 });
 
 // Auth middleware to protect routes
