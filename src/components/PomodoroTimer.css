@@ -1,0 +1,345 @@
+/* PomodoroTimer.css */
+.pomodoro-timer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.pomodoro-timer {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  border-top: 5px solid var(--accent-color); /* Default border */
+}
+
+.pomodoro-timer.work {
+  border-top-color: var(--pomodoro-work-color, #4CAF50);
+}
+.pomodoro-timer.shortbreak {
+  border-top-color: var(--pomodoro-short-break-color, #2196F3);
+}
+.pomodoro-timer.longbreak {
+  border-top-color: var(--pomodoro-long-break-color, #FFC107);
+}
+
+.pomodoro-settings-btn {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 5px;
+}
+
+.pomodoro-settings-btn:hover {
+  color: var(--accent-color);
+}
+
+.pomodoro-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.pomodoro-timer h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+.focused-task {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.focused-task span {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.timer-display {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: var(--input-bg);
+  border-radius: 8px;
+  color: var(--accent-color);
+}
+
+.timer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.timer-controls .control-btn {
+  padding: 10px 18px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.timer-controls .control-btn.play-btn {
+  background-color: var(--button-primary-bg);
+  color: var(--button-primary-text);
+}
+.timer-controls .control-btn.play-btn:hover {
+  background-color: var(--button-primary-hover-bg);
+}
+
+.timer-controls .control-btn.pause-btn {
+  background-color: var(--button-warning-bg);
+  color: var(--button-primary-text);
+}
+.timer-controls .control-btn.pause-btn:hover {
+  background-color: var(--button-warning-hover-bg, #e69500);
+}
+
+.timer-controls .control-btn.reset-btn,
+.timer-controls .control-btn.skip-btn {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+}
+.timer-controls .control-btn.reset-btn:hover,
+.timer-controls .control-btn.skip-btn:hover {
+  background-color: var(--button-secondary-hover-bg);
+}
+
+.timer-controls .control-btn:disabled {
+  background-color: var(--button-neutral-bg);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.cycles-info {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Settings Modal Specific Styles */
+.pomodoro-settings-modal {
+  border-top-color: var(--text-secondary); /* Neutral border for settings */
+  max-width: 450px;
+  z-index: 1002; /* Higher than minimized timer */
+}
+
+.pomodoro-settings-modal h3 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.setting-field {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.setting-field label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.setting-field input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.setting-field input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px var(--accent-color-alpha);
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.settings-actions .control-btn {
+  padding: 10px 20px;
+}
+
+.save-settings-btn {
+  background-color: var(--button-primary-bg) !important;
+  color: var(--button-primary-text) !important;
+}
+.save-settings-btn:hover {
+  background-color: var(--button-primary-hover-bg) !important;
+}
+
+.cancel-settings-btn {
+  background-color: var(--button-secondary-bg) !important;
+  color: var(--button-secondary-text) !important;
+}
+.cancel-settings-btn:hover {
+  background-color: var(--button-secondary-hover-bg) !important;
+}
+
+/* Styles for the Minimized Timer View */
+.pomodoro-timer.minimized {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: auto; /* Adjust as needed, or set a fixed width like 250px */
+  min-width: 220px; /* Ensure it's not too small */
+  padding: 10px 15px;
+  background-color: var(--pomodoro-bg-color, #fff);
+  border: 1px solid var(--pomodoro-border-color, #ddd);
+  border-radius: var(--border-radius, 8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000; /* Ensure it's above other content but below modals */
+  color: var(--text-color, #333);
+  transition: all 0.3s ease-in-out;
+}
+
+.pomodoro-timer.minimized:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.minimized-content {
+  display: flex;
+  flex-direction: column; /* Stack session, time, task vertically */
+  align-items: flex-start; /* Align text to the left */
+  margin-right: 15px; /* Space between content and maximize button */
+}
+
+.minimized-session {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--pomodoro-accent-color, #f26c68);
+  margin-bottom: 3px;
+}
+
+.minimized-time {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--text-color, #333);
+  margin-bottom: 3px;
+}
+
+.minimized-task {
+  font-size: 0.75rem;
+  color: var(--text-secondary-color, #555);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px; /* Prevent very long task names from breaking layout */
+}
+
+/* Ensure the maximize button in minimized view is styled like other icon buttons */
+.pomodoro-timer.minimized .pomodoro-control-btn.icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--icon-color, #555);
+  font-size: 1.2rem; /* Adjust icon size if needed */
+  padding: 5px;
+}
+
+.pomodoro-timer.minimized .pomodoro-control-btn.icon-btn:hover {
+  color: var(--icon-hover-color, #000);
+}
+
+/* Ensure the main timer overlay doesn't interfere when minimized */
+/* This might not be needed if the minimized view is completely separate JSX */
+
+/* Adjustments for dark theme if specific overrides are needed for minimized view */
+.dark-theme .pomodoro-timer.minimized {
+  background-color: var(--pomodoro-bg-color-dark, #2e2e2e);
+  border-color: var(--pomodoro-border-color-dark, #444);
+  color: var(--text-color-dark, #f0f0f0);
+}
+
+.dark-theme .minimized-session {
+  color: var(--pomodoro-accent-color-dark, #ff8a80);
+}
+
+.dark-theme .minimized-time {
+  color: var(--text-color-dark, #f0f0f0);
+}
+
+.dark-theme .minimized-task {
+  color: var(--text-secondary-color-dark, #aaa);
+}
+
+.dark-theme .pomodoro-timer.minimized .pomodoro-control-btn.icon-btn {
+  color: var(--icon-color-dark, #bbb);
+}
+
+.dark-theme .pomodoro-timer.minimized .pomodoro-control-btn.icon-btn:hover {
+  color: var(--icon-hover-color-dark, #fff);
+}
+
+/* Responsive adjustments for minimized timer if needed */
+@media (max-width: 480px) {
+  .pomodoro-timer.minimized {
+    bottom: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    min-width: 180px;
+  }
+  .minimized-time {
+    font-size: 1rem;
+  }
+  .minimized-task {
+    max-width: 100px;
+  }
+}
+
+/* CSS Variables for Pomodoro (add to App.css :root and .dark-theme) */
+/*
+:root {
+  --pomodoro-work-color: #4CAF50;
+  --pomodoro-short-break-color: #2196F3;
+  --pomodoro-long-break-color: #FFC107;
+}
+
+.dark-theme {
+  --pomodoro-work-color: #66bb6a; 
+  --pomodoro-short-break-color: #42a5f5;
+  --pomodoro-long-break-color: #ffa726;
+}
+*/

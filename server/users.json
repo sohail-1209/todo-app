@@ -1,0 +1,38 @@
+[
+  {
+    "username": "sohail",
+    "password": "$2a$10$Ce410Gh6Mn0RSHdQTVH8gOtSpcKXAWuyL9U0WgvNaTnDcNESzebwy"
+  },
+  {
+    "username": "maseera",
+    "password": "$2a$10$RWT04FqE2HIgmbN3qNd1xu21VqD259Jsr/nUnnLyEt6L85VWk2YsS"
+  },
+  {
+    "id": "1748083286229",
+    "username": "ruhu",
+    "password": "$2a$10$.oqdfQjTzMenHuhMVRTAlu1n2dogDle8Yyz4g.opqDJVaQUL/3gN.",
+    "profileImage": "/uploads/profile-1748083286086-966368292.jpeg",
+    "createdAt": "2025-05-24T10:41:26.229Z"
+  },
+  {
+    "id": "1748083520805",
+    "username": "ruhuu",
+    "password": "$2a$10$8u81tKJiQzu5R19AoKg2gudxNotofbTcUSLKjnjgvk3sWlugCMmRK",
+    "profileImage": "/uploads/profile-1748083520538-763618303.jpeg",
+    "createdAt": "2025-05-24T10:45:20.805Z"
+  },
+  {
+    "id": "1748084997195",
+    "username": "abdul",
+    "password": "$2a$10$gKb6VH.j74FuOG8yvkppT.beW8P2HsQlAzr9FLUEA0vrZvOBU6cKG",
+    "profileImage": "/uploads/profile-1748084996973-312830506.jpg",
+    "createdAt": "2025-05-24T11:09:57.195Z"
+  },
+  {
+    "id": "1748085495747",
+    "username": "testuser",
+    "password": "$2a$10$1TRu4C/UBcpOGy8U.S1qmOQia6zq3SSpKvHlN4grRhmjFAJyVCZyW",
+    "profileImage": "",
+    "createdAt": "2025-05-24T11:18:15.747Z"
+  }
+]

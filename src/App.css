@@ -1,5 +1,1985 @@
+/* ===== BASE & VARIABLES ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Color System */
+  --accent-color: #7b68ee;
+  --accent-color-rgb: 123, 104, 238;
+  --accent-color-darker: #5a4eae;
+  --accent-color-light: #e8e5ff;
+  
+  /* Light Theme (Default) */
+  --bg-primary: #f8fafc;
+  --bg-container: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+  --border-color: #e2e8f0;
+  --input-bg: #ffffff;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Buttons */
+  --button-primary-bg: var(--accent-color);
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: #e9e9f3;
+  --button-secondary-text: var(--text-primary);
+  --button-secondary-hover-bg: #d7d7e3;
+  --button-danger-bg: #ff4d4f;
+  --button-warning-bg: #faad14;
+  --button-neutral-bg: #bfbfbf;
+  
+  /* Cards & UI Elements */
+  --card-bg: #ffffff;
+  --card-border-color: #e0e0e0;
+  --card-shadow: 0 2px 8px rgba(var(--accent-color-rgb), 0.15);
+  --card-shadow-hover: 0 6px 18px rgba(var(--accent-color-rgb), 0.22);
+  --card-hover-bg: #f9f9f9;
+  
+  /* Priority Colors */
+  --priority-high-color: #ff4d4f;
+  --priority-medium-color: #faad14;
+  --priority-low-color: #52c41a;
+  
+  /* Status Colors */
+  --completed-text-color: #8c8c8c;
+  --todo-item-hover-bg: #f0f0f8;
+  
+  /* Pomodoro Timer */
+  --pomodoro-work-color: #4CAF50;
+  --pomodoro-short-break-color: #2196F3;
+  --pomodoro-long-break-color: #FFC107;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ===== BASE STYLES ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 400;
+  min-height: 100vh;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 0.75em;
+  color: var(--text-primary);
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--accent-color-darker);
+  text-decoration: underline;
+}
+
+button, input, textarea, select {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+  border-radius: var(--radius-md);
+}
+
+/* ===== FORMS ===== */
+.form-group {
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  appearance: none;
+}
+
+.form-control:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.1);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+/* Select dropdown */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '⌄';
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-tertiary);
+}
+
+select.form-control {
+  padding-right: 2.5rem;
+  appearance: none;
+  background-image: none;
+}
+
+/* Checkbox and Radio */
+.checkbox-label,
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-input,
+.radio-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  appearance: none;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+
+.checkbox-input:checked,
+.radio-input:checked {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.checkbox-input:checked::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.75rem;
+}
+
+.radio-input {
+  border-radius: 50%;
+}
+
+.radio-input:checked::after {
+  content: '';
+  position: absolute;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Form validation */
+.form-control.is-invalid {
+  border-color: var(--button-danger-bg);
+}
+
+.form-control.is-valid {
+  border-color: var(--button-success-bg);
+}
+
+.invalid-feedback {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--button-danger-bg);
+}
+
+.valid-feedback {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--button-success-bg);
+}
+
+button {
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* Utility Classes */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 1rem; }
+.gap-4 { gap: 1.5rem; }
+.gap-5 { gap: 2rem; }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Dark Theme Overrides */
+.dark-theme {
+  --bg-primary: #1f2023;
+  --bg-container: #2a2c30;
+  --text-primary: #e1e3e6;
+  --text-secondary: #b0b3b8;
+  --text-tertiary: #8a8d93;
+  --accent-color: #9370db;
+  --accent-color-rgb: 147, 112, 219;
+  --border-color: #4a4d50;
+  --input-bg: #2a2c30;
+  --card-bg: #2a2c30;
+  --card-hover-bg: #33363a;
+  --button-secondary-bg: #3a3d42;
+  --button-secondary-hover-bg: #454950;
+  --todo-item-hover-bg: #32353b;
+  --input-bg: #25272b;
+  --button-primary-bg: var(--accent-color);
+  --button-primary-text: #fff;
+  --button-secondary-bg: #3a3a4a;
+  --button-secondary-text: var(--text-primary);
+  --button-secondary-hover-bg: #43434f;
+  --button-danger-bg: #d32f2f;
+  --button-warning-bg: #f57c00;
+  --button-neutral-bg: #616161;
+  --completed-text-color: #757575;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --shadow-color-hover: rgba(0, 0, 0, 0.4);
+  --priority-high-color: #e57373;
+  --priority-medium-color: #ffb74d;
+  --priority-low-color: #81c784;
+  --todo-item-hover-bg: #30303c;
+  
+  /* Card Variables - Dark Theme */
+  --card-bg: #252529;
+  --card-border-color: #3a3a3a;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --card-shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.4);
+  --card-hover-bg: #2d2d35;
+  --card-bg: #2c2c38;
+  --card-border-color: #40404f;
+  /* Card shadow now uses a lighter accent color for dark mode */
+  --card-shadow: 0 2px 8px rgba(var(--accent-color-rgb), 0.22);
+  --card-shadow-hover: 0 6px 18px rgba(var(--accent-color-rgb), 0.33);
+  --card-hover-bg: #353543; /* Slightly lighter dark for hover */
+
+  /* Pomodoro Session Colors */
+  --pomodoro-work-color: #66bb6a; 
+  --pomodoro-short-break-color: #42a5f5;
+  --pomodoro-long-break-color: #ffa726;
+  --accent-color-darker: #7e57c2; /* Darker shade of accent for hovers/active in dark */
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary); /* Use background-color instead of background for solid colors */
+  color: var(--text-primary);
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* Ensure .App can take full height if needed */
+  align-items: center; /* Center .App horizontally */
+  padding: 0 1rem; /* Add some horizontal padding to body for smaller screens */
+}
+
 .App {
+  width: 100%;
+  max-width: 1280px; /* Max width for the overall app content area */
+  min-height: 100vh; /* Ensure .App itself can fill height if body doesn't enforce it enough */
+  display: block;
+  flex-direction: column;
+  align-items: center; /* Center .todo-container within .App */
+  padding: 2rem 1rem; /* Vertical and horizontal padding for .App */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  justify-content: center;
+} 
+
+/* General h1, if needed elsewhere, can be more generic */
+h1 {
+  font-size: 2rem; /* Reduced from 2.5rem */
+  margin-bottom: 0; /* Header already has margin, h1 itself doesn't need bottom margin here */
+  color: var(--text-primary);
+  font-weight: bold; /* Keep bold, but size will be specific */
+}
+/* Filter Bar Styles */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+  
+  @media (min-width: 768px) {
+    padding: 1.25rem;
+  }
+}
+
+.filter-bar:hover {
+  box-shadow: var(--shadow);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+}
+
+/* Profile Image Upload */
+.profile-image-upload {
+  width: 100%;
+  margin: 1rem 0;
+  cursor: pointer;
   text-align: center;
+  padding: 1.5rem;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-image-upload:hover {
+  border-color: var(--accent-color);
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.upload-placeholder span {
+  font-size: 2rem;
+  color: var(--accent-color);
+}
+
+.image-preview {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-image-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.2s ease;
+}
+
+.remove-image-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Search Input */
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 0.6rem 2rem 0.6rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  width: 220px;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(123, 104, 238, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 0.75rem;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+/* Radio Buttons */
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-hover);
+  padding: 0.5rem;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+.filter-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-right: 0.5rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  
+  @media (min-width: 768px) {
+    font-size: 0.9375rem;
+    padding: 0;
+  }
+  
+  &:hover {
+    background-color: var(--bg-hover);
+  }
+}
+
+.radio-option:hover {
+  color: var(--accent-color);
+}
+
+.radio-option input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.1em;
+  height: 1.1em;
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.radio-option input[type="radio"]:checked {
+  border-color: var(--accent-color);
+  background-color: var(--accent-color);
+  background-image: radial-gradient(circle, white 35%, transparent 40%);
+}
+
+/* Select Inputs */
+.select-container {
+  position: relative;
+}
+
+.select-label {
+  position: absolute;
+  top: -0.5rem;
+  left: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  background: var(--card-bg);
+  padding: 0 0.25rem;
+  z-index: 1;
+}
+
+.select-input {
+  padding: 0.6rem 2rem 0.6rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 2.5rem;
+  min-width: 160px;
+  transition: all 0.2s ease;
+}
+
+.select-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(123, 104, 238, 0.1);
+}
+
+.select-container::after {
+  content: '⌄';
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-tertiary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .filter-bar {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  
+  .search-input {
+    width: 180px;
+  }
+  
+  .select-input {
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter-bar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .filter-group {
+    width: 100%;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .radio-group {
+    justify-content: space-between;
+    padding: 0.75rem;
+  }
+  
+  .select-input {
+    width: 100%;
+  }
+}
+
+.app-header {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+  
+  h1 {
+    margin: 0 0 1rem 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    
+    @media (min-width: 768px) {
+      margin: 0;
+      font-size: 2rem;
+    }
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-right: 0.5rem;
+  }
+
+  .profile-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+  }
+
+  .profile-initial {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .user-badge {
+    font-weight: 500;
+    color: var(--text-primary);
+    display: none;
+    
+    @media (min-width: 768px) {
+      display: block;
+    }
+  }
+  
+  .theme-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: var(--bg-hover);
+    }
+  }
+  
+  .logout-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+.todo-container {
+  background: var(--bg-container);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  padding: 1.5rem; /* Reduced padding for mobile */
+  width: calc(100% - 2rem); /* Account for horizontal margin */
+  max-width: 700px;
+  margin: 0 auto 1.5rem; /* Center the container and add bottom margin */
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+  box-sizing: border-box; /* Ensure padding is included in width */
+  
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.todo-container:hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  flex-direction: column; /* Stack form elements vertically on mobile */
+  width: 100%;
+  
+  /* Desktop layout */
+  @media (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+}
+
+.todo-form input[type="text"] {
+  flex: 1;
+  padding: 12px 16px; /* Slightly reduced padding for mobile */
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 10px;
+  font-size: 1rem; /* Slightly smaller font for mobile */
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%; /* Full width on mobile */
+  box-sizing: border-box; /* Include padding in width */
+  
+  @media (min-width: 768px) {
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    width: auto;
+    min-width: 200px;
+  }
+}
+
+.todo-form input[type="text"]:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.2);
+}
+
+.todo-form input[type="text"]::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.8; /* Ensure it's not too faint */
+}
+
+.todo-due-date-input {
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%; /* Full width on mobile */
+  box-sizing: border-box;
+  margin: 8px 0; /* Add vertical spacing on mobile */
+  
+  @media (min-width: 768px) {
+    width: auto;
+    min-width: 150px;
+    margin: 0 0 0 8px; /* Reset margin for desktop */
+  }
+}
+
+.todo-due-date-input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.8;
+}
+
+.todo-due-date-input:focus {
+  border-color: var(--accent-color);
+}
+
+.todo-priority-select {
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%; /* Full width on mobile */
+  box-sizing: border-box;
+  margin: 8px 0; /* Add vertical spacing on mobile */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23999%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%;
+  background-size: 0.65em auto;
+  padding-right: 2.5rem;
+  
+  @media (min-width: 768px) {
+    width: auto;
+    min-width: 120px;
+    margin: 0 0 0 8px; /* Reset margin for desktop */
+  }
+}
+
+.todo-priority-select:focus {
+  border-color: var(--accent-color);
+}
+
+.todo-tags-input {
+  flex: 1; /* Allow it to take available space */
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+  margin-left: 8px; /* Space from priority select */
+  min-width: 150px; /* Minimum width so it doesn't get too small */
+}
+
+.todo-tags-input::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.8;
+}
+
+.todo-tags-input:focus {
+  border-color: var(--accent-color);
+}
+
+.reminder-group .reminder-enable-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: normal; /* Override default label bolding if any */
+}
+
+.reminder-group .reminder-enable-label input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.reminder-details-form {
+  margin-top: 10px;
+  padding-left: 20px; /* Indent reminder details */
+  border-left: 2px solid var(--border-color);
+}
+
+.dark-theme .reminder-details-form {
+  border-left: 2px solid var(--border-color);
+}
+
+.relative-reminder-inputs,
+.absolute-reminder-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between elements */
+  margin-top: 8px;
+}
+
+.reminder-input-offset-value,
+.todo-select-reminder-offset-unit,
+.reminder-input-absolute-time {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  flex-grow: 1; /* Allow inputs to take available space */
+}
+
+.todo-select-reminder-offset-unit {
+  flex-grow: 2; /* Give select a bit more space if needed */
+}
+
+.todo-form button {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.todo-form button:hover {
+  filter: brightness(90%);
+}
+
+.todo-form button:active {
+  transform: translateY(1px);
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todo-list li {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border-color);
+  border-radius: 12px; /* Slightly increased border-radius for a softer look */
+  margin-bottom: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column; /* Allow subtasks to stack vertically */
+  align-items: stretch; /* Stretch children to full width */
+  gap: 10px; /* Gap between main content and subtask section */
+  transition: box-shadow 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out, transform 0.2s ease-out; /* Updated transitions */
+  color: var(--text-primary);
+  box-shadow: var(--card-shadow);
+}
+
+.todo-list li:hover {
+  background-color: var(--card-hover-bg); /* Use new hover bg */
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: var(--card-shadow-hover); /* Use new hover shadow */
+}
+
+.todo-list li.dragging {
+  background-color: var(--card-hover-bg); /* Consistent hover background */
+  box-shadow: var(--card-shadow-hover) !important; /* Use new hover shadow, ensure it overrides */
+  transform: translateY(-3px) scale(1.01) rotate(1deg);
+}
+
+.todo-content-wrapper {
+  display: flex;
+  justify-content: space-between; /* Pushes actions to the right */
+  align-items: center; /* Align items vertically in the main content row */
+  width: 100%;
+  gap: 4px; /* Space between text and due date */
+}
+
+.todo-main-content {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Matches original gap for checkbox and text */
+  flex-grow: 1; /* Allow main content to take available space */
+}
+
+.todo-list li .todo-text {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.todo-due-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-left: 30px; /* Align with text, assuming checkbox area width */
+}
+
+.todo-priority-display {
+  font-size: 0.75rem; /* Slightly smaller than due date */
+  color: var(--text-tertiary); /* A more subtle color */
+  margin-left: 30px; /* Align with text/due date */
+  margin-top: 2px; /* Small space below due date if both exist */
+}
+
+.todo-due-date.overdue {
+  color: var(--button-danger-bg); /* Use danger color for overdue tasks */
+  font-weight: bold;
+}
+
+.todo-list li.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--completed-text-color);
+  opacity: 0.7;
+  transition: color 0.3s, opacity 0.3s;
+}
+
+.todo-checkbox {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.todo-checkbox input[type="checkbox"] {
+  accent-color: var(--accent-color);
+  width: 18px;
+  height: 18px;
+  margin-right: 6px;
+}
+
+.todo-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.todo-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.todo-filters button {
+  background: var(--button-secondary-bg);
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  color: var(--button-secondary-text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.todo-filters button.active, .todo-filters button:hover {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+}
+
+.todo-sort {
+  display: flex;
+  align-items: center;
+}
+
+.todo-tag-filter {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.todo-tag-filter label {
+  margin-right: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.todo-tag-filter select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  /* margin-left: 5px; /* Optional: if label is not used or for extra spacing */
+  transition: border-color 0.2s;
+}
+
+.todo-tag-filter select:focus {
+  border-color: var(--accent-color);
+}
+
+.todo-sort select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.todo-sort select:focus {
+  border-color: var(--accent-color);
+}
+
+.todo-actions {
+  display: flex;
+  gap: 8px;
+  opacity: 0; /* Initially hidden */
+  transform: translateX(10px); /* Initially shifted right */
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.todo-list li:hover .todo-actions {
+  opacity: 1; /* Reveal on hover */
+  transform: translateX(0); /* Slide in on hover */
+}
+
+.edit-btn {
+  background-color: var(--button-warning-bg) !important;
+  color: var(--button-primary-text) !important;
+}
+
+.edit-btn:hover {
+  filter: brightness(90%) !important;
+}
+
+.cancel-edit-btn {
+  background-color: var(--button-neutral-bg) !important;
+  color: var(--button-primary-text) !important;
+  margin-left: 8px;
+}
+
+.cancel-edit-btn:hover {
+  filter: brightness(90%) !important;
+}
+
+.todo-list button {
+  background: var(--button-danger-bg);
+  color: var(--button-primary-text);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.todo-list button:hover {
+  filter: brightness(90%);
+}
+
+.clear-completed-btn {
+  background: var(--accent-color);
+  color: var(--button-primary-text);
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clear-completed-btn:hover {
+  filter: brightness(90%);
+}
+
+.empty-msg {
+  text-align: center;
+  color: var(--text-secondary);
+  margin-top: 24px;
+  font-size: 1.1rem;
+  padding: 10px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.app-header {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-color-darker));
+  color: white;
+  padding: 1rem 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  background-color: rgba(123, 104, 238, 0.9);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.app-title svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all var(--transition);
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+.app-layout {
+  display: flex;
+  min-height: calc(100vh - 4rem);
+}
+
+.sidebar {
+  width: 280px;
+  padding: 1.5rem;
+  background: var(--bg-container);
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+  position: sticky;
+  top: 4rem;
+  height: calc(100vh - 4rem);
+}
+
+.sidebar-section {
+  margin-bottom: 2rem;
+}
+
+.sidebar-section h3 {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition);
+}
+
+.sidebar-link:hover {
+  background: var(--bg-hover);
+  color: var(--accent-color);
+}
+
+.sidebar-link.active {
+  background: rgba(123, 104, 238, 0.1);
+  color: var(--accent-color);
+}
+
+.sidebar-link svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.content-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.content-subtitle {
+  color: var(--text-tertiary);
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.app-footer {
+  background: var(--bg-container);
+  border-top: 1px solid var(--border-color);
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: color var(--transition);
+}
+
+.footer-link:hover {
+  color: var(--accent-color);
+}
+
+.copyright {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 1024px) {
+  .app-layout {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .main-content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .app-title {
+    font-size: 1.25rem;
+  }
+  
+  .content-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .content-title {
+    font-size: 1.5rem;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-links {
+    order: -1;
+    margin-bottom: 1rem;
+  }
+}
+
+.theme-toggle-btn:hover {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border-color: var(--button-primary-bg);
+}
+
+.notification-permission-btn {
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  margin-left: 10px; /* Or adjust as needed for layout */
+}
+
+.notification-permission-btn:hover {
+  background-color: var(--button-secondary-hover-bg);
+}
+
+.todo-list li.priority-high {
+  border-left: 4px solid var(--priority-high-color, #ff4d4f); /* Reddish for high */
+}
+.todo-list li.priority-medium {
+  border-left: 4px solid var(--priority-medium-color, #1890ff); /* Bluish for medium */
+}
+.todo-list li.priority-low {
+  border-left: 4px solid var(--priority-low-color, #52c41a); /* Greenish for low */
+}
+
+/* Tags Display Styles */
+.todo-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  margin-left: 30px; /* Align with other indented items like due date/priority */
+  /* This assumes checkbox width + gap ~ 30px. Adjust if necessary. */
+}
+
+.todo-tag-item {
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Optional: Hover effect for tags */
+.todo-tag-item:hover {
+  background-color: var(--accent-color);
+  color: var(--button-primary-text); /* Assuming accent color bg works well with primary button text color */
+}
+
+.todo-recurrence-display {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+}
+
+/* Subtask Styles */
+.subtasks-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color); /* Separator line */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subtask-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px; /* Slightly less padding */
+  border-radius: 6px;
+  background-color: rgba(0,0,0,0.03); /* Very subtle background to differentiate */
+  font-size: 0.9em;
+}
+
+.dark-theme .subtask-item {
+  background-color: rgba(255,255,255,0.04);
+}
+
+.subtask-item input[type="checkbox"] {
+  accent-color: var(--accent-color);
+  width: 16px; /* Slightly smaller */
+  height: 16px;
+  margin-right: 4px;
+}
+
+.subtask-text {
+  flex-grow: 1;
+}
+
+.subtask-item.completed .subtask-text {
+  text-decoration: line-through;
+  color: var(--completed-text-color);
+  opacity: 0.7;
+}
+
+.subtask-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.subtask-actions button {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subtask-actions button:hover {
+  color: var(--text-primary);
+  background-color: rgba(0,0,0,0.05);
+}
+
+.dark-theme .subtask-actions button:hover {
+  background-color: rgba(255,255,255,0.08);
+}
+
+.edit-subtask-btn svg,
+.delete-subtask-btn svg {
+  width: 14px; /* Smaller icons */
+  height: 14px;
+}
+
+.add-subtask-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.subtask-input {
+  flex-grow: 1;
+  padding: 7px 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 6px;
+  font-size: 0.9em;
+  outline: none;
+}
+
+.subtask-input:focus {
+  border-color: var(--accent-color);
+}
+
+.add-subtask-btn {
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.add-subtask-btn:hover {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+}
+
+.pomodoro-toggle-btn {
+  background-color: var(--accent-color); /* Or another distinct color */
+  color: var(--button-primary-text); /* Assuming accent color is dark enough */
+  margin-left: 10px;
+}
+
+.pomodoro-toggle-btn:hover {
+  background-color: var(--accent-color-darker); /* Define if not already present */
+}
+
+.todo-actions .focus-btn {
+  background-color: var(--pomodoro-work-color);
+  color: white; /* Assuming green is dark enough */
+}
+
+.todo-actions .focus-btn:hover {
+  background-color: #3e8e41; /* Darker green */
+}
+
+.dark-theme .todo-actions .focus-btn {
+  background-color: var(--pomodoro-work-color); /* Already a lighter green for dark theme */
+}
+
+.dark-theme .todo-actions .focus-btn:hover {
+  background-color: #55a058; /* Slightly darker version of the dark theme green */
+}
+
+/* Styling for the date, priority, and tags inputs to match text input height better */
+@media (min-width: 769px) { /* Apply only when not stacked */
+  .todo-form .todo-due-date-input,
+  .todo-form .todo-priority-select,
+  .todo-form .todo-tags-input {
+    height: 48px; /* Match approx height of text input with its padding */
+    box-sizing: border-box;
+    font-size: 1rem; /* Standardize font size a bit */
+  }
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto; /* Center the auth form */
+}
+
+.auth-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+  padding: 14px 18px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border-radius: 10px;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  min-width: 0;
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="password"]:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.2);
+}
+
+.auth-form input[type="text"]::placeholder,
+.auth-form input[type="password"]::placeholder {
+  color: var(--text-tertiary);
+  opacity: 0.8;
+}
+
+.auth-form button {
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.auth-form button:hover {
+  filter: brightness(90%);
+}
+
+.auth-form button:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 768px) { /* Breakpoint for stacking form elements */
+  .todo-form {
+    flex-direction: column; /* Stack form elements vertically */
+    gap: 0; /* Remove gap when stacking, use margin-bottom instead */
+  }
+
+  .todo-form input[type="text"],
+  .todo-form .todo-due-date-input,
+  .todo-form .todo-priority-select,
+  .todo-form .todo-tags-input,
+  .todo-form button {
+    width: 100%; /* Make all form elements full width */
+    margin-left: 0; /* Reset any left margins */
+    margin-bottom: 12px; /* Add some space between stacked elements */
+  }
+
+  .todo-form .todo-due-date-input,
+  .todo-form .todo-priority-select,
+  .todo-form .todo-tags-input {
+    height: auto; /* Let height be natural when stacked */
+    padding: 12px 15px; /* Adjust padding for stacked view */
+    font-size: 1rem;
+  }
+
+  .todo-form button {
+    padding: 12px 15px;
+    font-size: 1rem;
+  }
+
+  .auth-form {
+    padding: 1.5rem;
+  }
+
+  .auth-form input[type="text"],
+  .auth-form input[type="password"],
+  .auth-form button {
+    font-size: 1rem;
+    padding: 12px 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .App {
+    padding: 20px 5px;
+  }
+
+  .todo-container {
+    padding: 20px 10px 15px 10px;
+    max-width: 95vw;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .todo-form {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .todo-form input[type="text"] {
+    font-size: 0.95rem;
+  }
+
+  .todo-due-date-input {
+    width: 100%; /* Stack date input below text input */
+    margin-left: 0;
+    margin-top: 10px; /* Space when stacked */
+  }
+
+  .todo-priority-select {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px; /* Space when stacked */
+  }
+
+  .todo-tags-input {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 10px; /* Space when stacked */
+  }
+
+  .todo-form button {
+    font-size: 0.95rem;
+    padding: 10px 15px;
+  }
+
+  .cancel-edit-btn {
+    margin-left: 0;
+  }
+
+  .todo-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .todo-sort {
+    width: 100%; /* Make sort dropdown full width on small screens */
+  }
+
+  .todo-sort select {
+    width: 100%;
+    text-align: center;
+  }
+
+  .todo-filters {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .clear-completed-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .todo-list li {
+    padding: 12px 10px;
+    /* gap: 8px; */ /* Gap is now handled by todo-main-content and todo-content-wrapper */
+    flex-direction: column; /* Stack content and actions on very small screens if needed */
+    align-items: stretch;
+  }
+
+  .todo-content-wrapper {
+    width: 100%;
+  }
+
+  .todo-due-date {
+    margin-left: 28px; /* Adjust for smaller screens */
+    font-size: 0.75rem;
+  }
+
+  .todo-priority-display {
+    margin-left: 28px; /* Adjust for smaller screens */
+    font-size: 0.7rem;
+  }
+
+  .todo-list li .todo-text {
+    font-size: 0.95rem;
+  }
+
+  .todo-actions {
+    flex-direction: column; /* Stack edit/delete buttons */
+    align-items: flex-end; /* Align them to the right */
+    gap: 6px;
+    width: 100%; /* Allow actions to take full width if needed for stacking */
+    margin-top: 8px; /* Add space when stacked below content */
+  }
+
+  .todo-actions button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .todo-filters button {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+  }
+
+  .todo-actions {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .todo-actions button {
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .App-logo {
@@ -35,4 +2015,165 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.filter-sort-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px; /* Reduced from 20px */
+  flex-wrap: wrap;
+  gap: 10px; /* Add gap for wrapped items */
+}
+
+/* Glass Card Effect for Auth Forms */
+.auth-container {
+  max-width: 400px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glass overlay effect */
+.auth-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(123, 104, 238, 0.1), rgba(90, 78, 174, 0.1));
+  z-index: -1;
+  border-radius: 20px;
+}
+
+/* Dark theme adjustments */
+.dark-theme .auth-container {
+  background: rgba(30, 30, 40, 0.7);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.auth-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.75rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.auth-container input {
+  padding: 0.85rem 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.dark-theme .auth-container input {
+  background: rgba(0, 0, 0, 0.2);
+  color: #f0f0f0;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.auth-container input:focus {
+  border-color: rgba(123, 104, 238, 0.6);
+  box-shadow: 0 0 0 3px rgba(123, 104, 238, 0.2);
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dark-theme .auth-container input:focus {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.auth-container button[type="submit"] {
+  background: var(--accent-color);
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+}
+
+.auth-container button[type="submit"]:hover {
+  background: var(--accent-color-darker);
+  transform: translateY(-1px);
+}
+
+.auth-container .link-btn {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+}
+
+.dark-theme .auth-container .link-btn {
+  color: rgba(200, 200, 255, 0.9);
+}
+
+.auth-container .link-btn:hover {
+  text-decoration: none;
+}
+
+.auth-error {
+  color: #ff6b6b;
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 10px;
+  border-left: 3px solid #ff6b6b;
+}
+
+.auth-container p {
+  text-align: center;
+  margin-top: 1.75rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.dark-theme .auth-container p {
+  color: rgba(200, 200, 200, 0.8);
+}
+
+.filter-buttons button, .tag-filter-select, .sort-dropdown select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filter-buttons button, .tag-filter-select, .sort-dropdown select:focus {
+  border-color: var(--accent-color);
 }
